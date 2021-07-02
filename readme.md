@@ -34,16 +34,6 @@ public class Employee
 }
 ```
 
-Model for Employee
-
-```csharp
-public class ErrorViewModel
-{
-    public string RequestId { get; set; }
-
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-}
-```
 
 ## SQL-Server 
 
