@@ -18,16 +18,11 @@ namespace Asp.netCoreMVCCRUD.Classes
                 .GetProperty(validationContext.MemberName)
                 .GetCustomAttributes(typeof(DisplayNameAttribute), true);
             
-            displayName = attributes != null ? 
-                (attributes[0] as DisplayNameAttribute).DisplayName : 
-                validationContext.DisplayName;
+            displayName = (attributes[0] as DisplayNameAttribute)?.DisplayName;
 
             return base.IsValid(value, validationContext);
         }
 
-        public override string FormatErrorMessage(string name)
-        {
-            return string.Format(ErrorMessageString, displayName.SplitCamelCase());
-        }
+        public override string FormatErrorMessage(string name) => string.Format(ErrorMessageString, displayName.SplitCamelCase());
     }
 }
