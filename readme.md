@@ -2,6 +2,8 @@
 
 Simple CRUD ASP.NET Core sample using SQL-Server as a database.
 
+:yellow_circle: See instructions.md for steps to run
+
 ![img](assets/F1a.png)
 
 </br>
