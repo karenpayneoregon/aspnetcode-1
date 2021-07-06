@@ -2,7 +2,7 @@
 
 Simple CRUD ASP.NET Core sample using SQL-Server as a database.
 
-![img](assets/F1.png)
+![img](assets/F1a.png)
 
 </br>
 
