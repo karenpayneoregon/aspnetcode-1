@@ -4,34 +4,80 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace Asp.netCoreMVCCRUD.Models
 {
-    public class Employee
+    public class Employee : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Special note on Required attribute, it's common to use
-        ///
-        /// "this field is required."
-        ///
-        /// Rather than how I used {0} which is replaced with the property name BUT that can be improved too,
-        /// see <see cref="Classes.RequiredAttribute"/> which overrides FormatErrorMessage which uses <see cref="Classes.StringHelpers.SplitCamelCase"/>
-        /// to split the property name on upper cased characters so in this case FullName becomes Full Name field is required
-        /// </summary>
+        private string _fullName;
+        private string _empCode;
+        private string _position;
+        private string _officeLocation;
+
         [Key]
         public int EmployeeId { get; set; }
-        [Column(TypeName ="nvarchar(250)")]
-        [Required(ErrorMessage ="{0} field is required.")]
+
+        [Column(TypeName = "nvarchar(250)")]
+        [Required(ErrorMessage = "{0} field is required.")]
         [DisplayName("Full Name")]
-        public string FullName { get; set; }
+        public string FullName
+        {
+            get => _fullName;
+            set
+            {
+                if (value == _fullName) return;
+                _fullName = value;
+                OnPropertyChanged();
+            }
+        }
+
         [Column(TypeName = "varchar(10)")]
         [DisplayName("Code")]
-        public string EmpCode { get; set; }
+        public string EmpCode
+        {
+            get => _empCode;
+            set
+            {
+                if (value == _empCode) return;
+                _empCode = value;
+                OnPropertyChanged();
+            }
+        }
+
         [Column(TypeName = "varchar(100)")]
-        public string Position { get; set; }
+        public string Position
+        {
+            get => _position;
+            set
+            {
+                if (value == _position) return;
+                _position = value;
+                OnPropertyChanged();
+            }
+        }
+
         [Column(TypeName = "varchar(100)")]
         [DisplayName("Office Location")]
-        public string OfficeLocation { get; set; }
+        public string OfficeLocation
+        {
+            get => _officeLocation;
+            set
+            {
+                if (value == _officeLocation) return;
+                _officeLocation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
